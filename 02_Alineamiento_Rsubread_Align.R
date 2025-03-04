@@ -3,21 +3,18 @@
 # cargar el paquete Rsubread
 library(Rsubread)
 # limpiar las variables del sistema
+
 rm(list = ls())
 
 # Estructura de las carpetas:
-
-# definir el directorio de trabajo en este directorio debe de estar la carpeta con
-# los  y el directorio con el 
-# carpetas ./RefData  ./RefGen47 
-
-# ./RefData/Hg38v47   <--- archivos de referencia
-# ./RefGen47          <--- indice del genoma
-# ./dir_analisis      <--- directorio de análisis (cambiar el nombre a conveniencia)
-# ./dir_analisis/RawData   <--- Los datos (archivos fastq) colocarlos en este directorio
+# definir el directorio de trabajo en este directorio deben de estar las carpetas: con
+# ./RefData/Hg38v47       <--- archivos de referencia
+# ./RefGen47              <--- indice del genoma
+# ./dir_analisis          <--- directorio de análisis (cambiar el nombre a conveniencia)
+# ./dir_analisis/RawData  <--- Los datos (archivos fastq) colocarlos en este directorio
 # definir al directorio de análisis y como de trabajo:
-setwd('./dir_analisis)
 
+setwd('./dir_analisis)
 dir_analisis <- getwd()
 
 dir.create("./Resultados")
@@ -101,6 +98,11 @@ for (val in archivo)
 # Esta hecho para serie de archivos con terminacion .BAM
 # carpeta:
 # ----------------------------  align ------------------------------------------
+
+# Ir al directorio de análisis y definirlo como de trabajo:
+
+setwd('./dir_analisis)
+dir_analisis <- getwd()
 
 dir_temp <- paste (dir_analisis,"/Resultados/align/", sep = "", collapse=NULL)
 archivo<-list.files(path = dir_temp, pattern = ".BAM$")
