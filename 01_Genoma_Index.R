@@ -1,19 +1,34 @@
 # ============================================================================
-# Crear el Indice del Genoma de Humano Hg38 v45 para Rsubread
+# Crear el Indice del Genoma de Humano Hg38 vXX para Rsubread
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Tener una carpeta con los datos del genoma y los archivos de topología
-# https://www.gencodegenes.org/
+# Los archivos se pueden descargar de --> https://www.gencodegenes.org/
+# archivo GTF, GFF3 y Fasta del Genoma de interes
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Cargar la libreria de Rsubread
 
 library(Rsubread)
 
-# cambiar indexsplit y memory dependiendo de las caracteristicas de la computadora
+# crear el directorio "./RefGen47/" en la carpeta de trabajo.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Si los recursos de la computadora son limitados
+# cambiar:
+# indexSplit = TRUE,
+# memory = VALOR <-- igual al máximo de la memoria del computador menos 2GB
+# Si la computadora tiene al menos 24GB de memoria se puede dejar como se muestra
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-buildindex(
-  basename = "./RefGen46/Hg38v46",
-  reference = "./RefData/GRCh38.primary_assembly.genome.fa.gz",
+if (file.exists("./RefData/Hg38v47/GRCh38.primary_assembly.genome.fa.gz"))
+  {
+  buildindex(
+  basename = "./RefGen47/Hg38v47",
+  reference = "./RefData/Hg38v47/GRCh38.primary_assembly.genome.fa.gz",
   gappedIndex = FALSE, 
   indexSplit = FALSE,
   # memory = 10000
   )
+  }
+else
+  {
+  print(paste("El archivo del genoma no se encuentra en la carpeta ./RefData/"))
+  }
