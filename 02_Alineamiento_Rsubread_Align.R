@@ -92,34 +92,3 @@ for (val in archivo)
     GTF.attrType = "gene_id",
     chrAliases = NULL)
 }
-
-# ==============================================================================
-# Elaborar las tablas de conteo con el featureCount de Subread
-# Esta hecho para serie de archivos con terminacion .BAM
-# carpeta:
-# ----------------------------  align ------------------------------------------
-
-# Ir al directorio de análisis y definirlo como de trabajo:
-
-setwd('./dir_analisis)
-dir_analisis <- getwd()
-
-dir_temp <- paste (dir_analisis,"/Resultados/align/", sep = "", collapse=NULL)
-archivo<-list.files(path = dir_temp, pattern = ".BAM$")
-archivo
-
-for (val in archivo)
-{
-  file1<-paste(dir_analisis,"/Resultados/align/",val, sep = "", collapse=NULL)
-  cuentas<-featureCounts(files=file1,
-                         annot.ext = "./RefData/Hg38v47/gencode.v47.primary_assembly.annotation.gtf.gz",
-                         isGTFAnnotationFile = TRUE,
-                         nthreads = 22)
-  write.table(
-    x=data.frame(cuentas$annotation[,c("GeneID")],
-                 cuentas$counts,stringsAsFactors = FALSE),
-    file=paste(dir_analisis,"/Resultados/counts/align/",val,".count", sep = "", collapse = NULL),
-    quote = FALSE,
-    sep = "\t",
-    row.names = FALSE)
-}
