@@ -14,7 +14,7 @@ rm(list = ls())
 # ./dir_analisis/RawData  <--- Los datos (archivos fastq) colocarlos en este directorio
 # definir al directorio de análisis y como de trabajo:
 
-setwd('./dir_analisis)
+setwd("./dir_analisis")
 dir_analisis <- getwd()
 
 dir.create("./Resultados")
@@ -22,7 +22,7 @@ dir.create("./Resultados/align")
 dir.create("./Resultados/counts")
 dir.create("./Resultados/counts/align")
 dir.create("./Resultados/DESeq2_align")
-setwd('../')
+setwd("../")
 
 # =====================================================================================
 #                             Alinear con align
