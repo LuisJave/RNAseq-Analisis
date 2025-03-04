@@ -1,5 +1,5 @@
-# ----------------- Alineamiento con Rsubread (Align) -------------------------- 
-# ==============================================================================
+# -----------------      Alineamiento con Rsubread (Align)     -------------------------- 
+# =======================================================================================
 # cargar el paquete Rsubread
 library(Rsubread)
 
@@ -24,15 +24,15 @@ dir.create("./Resultados/counts/align")
 dir.create("./Resultados/DESeq2_align")
 setwd('../')
 
-# ===========================================================================
-# Alinear con align
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Crear un conjunto con los nombres de los archivos a analizar
+# =====================================================================================
+#                             Alinear con align
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Crear la variable archivo con los nombres de los archivos a analizar
 dir_temp <- paste (dir_analisis,"/RawData/", sep = "", collapse=NULL)
 archivo <- list.files(path= dir_temp, pattern = ".gz$")
 archivo
 
-# loop para analizar todos los archivos, se analizaran como single end
+# loop para alinear/mapear todos los archivos, se alinearan como single end
 for (val in archivo)
 {
   file1<-paste(dir_analisis,"/RawData/",val, sep = "", collapse=NULL)
