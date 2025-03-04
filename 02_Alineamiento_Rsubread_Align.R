@@ -2,8 +2,8 @@
 # ==============================================================================
 # cargar el paquete Rsubread
 library(Rsubread)
-# limpiar las variables del sistema
 
+# limpiar las variables del sistema
 rm(list = ls())
 
 # Estructura de las carpetas:
