@@ -23,7 +23,7 @@ library(readr)
 rm(list = ls())
 
 # Definir el directorio de trabajo principal
-setwd("D:/AnalisisRNAseq_R")  # <-- Este directorio es propio de cada uno
+setwd("./dir_analisis")  # <-- Este directorio es propio de cada uno
 
 # guardar el directorio principal
 dir1 <- getwd()
@@ -243,5 +243,3 @@ plotCounts(dds, gene = which.min(res$padj), intgroup = "Condicion")
 
 # Para determinar el comportamiento de un gen particular sabiendo su codigo Ensembl
 plotCounts(dds, gene = "ENSG00000145794.17", intgroup = "Condicion")
-
-
