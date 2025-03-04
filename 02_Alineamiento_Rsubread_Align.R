@@ -5,22 +5,21 @@ library(Rsubread)
 # limpiar las variables del sistema
 rm(list = ls())
 
-# definir el directorio de trabajo en este directorio debe de estar la carpeta con
-# los archivos de referencia y el directorio con el indice del genoma
-# carpetas ./RefData  ./RefGen46 
 # Estructura de las carpetas:
-# ./RefData
-# ./RefGen46
-# ./Dir_analisis/RawData/fastq-files
-# ./Dir_analisis/Resultados
 
-# definir el directorio de análisis, donde estarán los resultados 
+# definir el directorio de trabajo en este directorio debe de estar la carpeta con
+# los  y el directorio con el 
+# carpetas ./RefData  ./RefGen47 
 
-dir_analisis <- "./Analisis_Neutrofilos"
+# ./RefData           <--- archivos de referencia
+# ./RefGen47          <--- indice del genoma
+# ./dir_analisis      <--- directorio de análisis (cambiar el nombre a conveniencia)
+# ./dir_analisis/RawData   <--- Los datos (archivos fastq) colocarlos en este directorio
+# definir al directorio de análisis y como de trabajo:
+setwd('./dir_analisis)
 
-# Los datos (archivos fastq) colocarlos en el directorio de analisis en una carpeta con nombre ./RawData
-# En el directorio de análisis Se crearan los directorios necesarios para los Resultados
-setwd(dir_analisis)
+dir_analisis <- getwd()
+
 dir.create("./Resultados")
 dir.create("./Resultados/align")
 dir.create("./Resultados/counts")
