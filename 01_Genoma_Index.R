@@ -19,8 +19,7 @@ library(Rsubread)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 if (file.exists("./RefData/Hg38v47/GRCh38.primary_assembly.genome.fa.gz"))
-{
-  buildindex(basename = "./RefGen47/Hg38v47",
+{ buildindex (basename = "./RefGen47/Hg38v47",
              reference = "./RefData/Hg38v47/GRCh38.primary_assembly.genome.fa.gz",
              gappedIndex = FALSE,
              indexSplit = FALSE,
