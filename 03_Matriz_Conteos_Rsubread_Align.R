@@ -11,7 +11,7 @@ library(tidyverse)
 rm(list = ls())
 
 # Definir el directorio de trabajo principal
-setwd("D:/AnalisisRNAseq_R")  # <-- Este directorio es propio de cada uno
+setwd("./dir_analisis")  # <-- Este directorio es propio de cada uno
 
 # guardar el directorio principal
 dir1 <- getwd()
