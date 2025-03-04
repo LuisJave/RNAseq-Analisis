@@ -11,7 +11,7 @@ rm(list = ls())
 # los  y el directorio con el 
 # carpetas ./RefData  ./RefGen47 
 
-# ./RefData           <--- archivos de referencia
+# ./RefData/Hg38v47   <--- archivos de referencia
 # ./RefGen47          <--- indice del genoma
 # ./dir_analisis      <--- directorio de análisis (cambiar el nombre a conveniencia)
 # ./dir_analisis/RawData   <--- Los datos (archivos fastq) colocarlos en este directorio
@@ -32,7 +32,7 @@ setwd('../')
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Crear un conjunto con los nombres de los archivos a analizar
 dir_temp <- paste (dir_analisis,"/RawData/", sep = "", collapse=NULL)
-archivo <- list.files(path= dir_temp, pattern = "fq.gz$")
+archivo <- list.files(path= dir_temp, pattern = ".gz$")
 archivo
 
 # loop para analizar todos los archivos, se analizaran como single end
@@ -43,7 +43,7 @@ for (val in archivo)
   # alineamiento
   align(
     # index for reference sequences
-    index = "./RefGen46/Hg38v46",
+    index = "./RefGen47/Hg38v47",
     # input reads and output
     readfile1 = file1,
     type = "rna",
@@ -89,7 +89,7 @@ for (val in archivo)
     detectSV = FALSE,
     # gene annotation
     useAnnotation = TRUE,
-    annot.ext = "./RefData/gencode.v46.primary_assembly.annotation.gtf.gz",
+    annot.ext = "./RefData/Hg38v47/gencode.v47.primary_assembly.annotation.gtf.gz",
     isGTF = TRUE,
     GTF.featureType = "exon",
     GTF.attrType = "gene_id",
@@ -110,7 +110,7 @@ for (val in archivo)
 {
   file1<-paste(dir_analisis,"/Resultados/align/",val, sep = "", collapse=NULL)
   cuentas<-featureCounts(files=file1,
-                         annot.ext = "./RefData/gencode.v46.primary_assembly.annotation.gtf.gz",
+                         annot.ext = "./RefData/Hg38v47/gencode.v47.primary_assembly.annotation.gtf.gz",
                          isGTFAnnotationFile = TRUE,
                          nthreads = 22)
   write.table(
