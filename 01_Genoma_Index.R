@@ -19,16 +19,11 @@ library(Rsubread)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 if (file.exists("./RefData/Hg38v47/GRCh38.primary_assembly.genome.fa.gz"))
-  {
-  buildindex(
-  basename = "./RefGen47/Hg38v47",
-  reference = "./RefData/Hg38v47/GRCh38.primary_assembly.genome.fa.gz",
-  gappedIndex = FALSE, 
-  indexSplit = FALSE,
-  # memory = 10000
-  )
-  }
-else
-  {
-  print(paste("El archivo del genoma no se encuentra en la carpeta ./RefData/"))
-  }
+{
+  buildindex(basename = "./RefGen47/Hg38v47",
+             reference = "./RefData/Hg38v47/GRCh38.primary_assembly.genome.fa.gz",
+             gappedIndex = FALSE,
+             indexSplit = FALSE,
+             # memory = 10000
+             )
+} else { print(paste("El archivo del genoma no se encuentra en la carpeta ./RefData/"))}
