@@ -1,0 +1,103 @@
+# Enhanced Volcano
+library(dplyr)
+library(ggplot2)
+library(ggrepel)
+library(EnhancedVolcano)
+
+# Cargar archivos de resultados de expresión diferencial producto de DESeq2
+# definir como directorio de trabajo la carpeta DESeq2
+setwd("./Resultados/DESeq2_align")
+
+# =======================================================================
+# Para datos alineados con subjunc
+ds_volcano <- read.csv('./Res_DS2_subjunc_annot.csv',header = TRUE)
+
+# =======================================================================
+# Para datos alineados con Align
+ds_volcano <- read.csv('./Res_DS2_align_annot.csv',header = TRUE)
+
+#========================================================================
+# seleccionar genes para mostrar en el gráfico 
+gen_sel<- ds_volcano %>% filter(abs(log2FoldChange)>=4) %>% dplyr::select(external_gene_name) %>% unlist()
+
+# Generar volcano plot
+
+EnhancedVolcano(ds_volcano,
+                lab = (ds_volcano$external_gene_name),
+                x = 'log2FoldChange',
+                y = 'pvalue',
+                # selectLab = c('ZBTB16','WNT5A'), # nombre de los genes que deseamos visualizar
+                selectLab = gen_sel,
+                xlim = c(min(ds_volcano$log2FoldChange, na.rm = TRUE) - 1.5, max(ds_volcano$log2FoldChange, na.rm = TRUE) + 1.5),
+                ylim = c(0, max(log10(ds_volcano$pvalue), na.rm = TRUE) + 25),
+                xlab = bquote(~Log[2] ~ "fold change"),
+                ylab = bquote(~-Log[10] ~ italic(P)),
+                axisLabSize = 18,
+                title = "Volcano plot",
+                subtitle = bquote(italic(EnhancedVolcano)),
+                caption = paste0("total = ", nrow(ds_volcano), " variables"),
+                titleLabSize = 18,
+                subtitleLabSize = 14,
+                captionLabSize = 14,
+                pCutoff = 0.05,
+                # pCutoffCol = y,
+                FCcutoff = 2,
+                cutoffLineType = "longdash",
+                cutoffLineCol = "black",
+                cutoffLineWidth = 0.4,
+                pointSize = 2,
+                labSize = 3,
+                labCol = "black",
+                labFace = "plain",
+                boxedLabels = TRUE,
+                parseLabels = FALSE,
+                shape = 19,
+                shapeCustom = NULL,
+                col = c("grey30", "forestgreen", "royalblue", "red2"),
+                colCustom = NULL,
+                colAlpha = 1/2,
+                colGradient = NULL,
+                colGradientBreaks = c(pCutoff, 1),
+                colGradientLabels = c("0", "1.0"),
+                colGradientLimits = c(0, 1),
+                legendLabels = c("NS", expression(Log[2] ~ FC), "p-value", expression(p - value ~ and ~ log[2] ~ FC)),
+                legendPosition = "right",
+                legendLabSize = 12,
+                legendIconSize = 5,
+                legendDropLevels = TRUE,
+                # encircle = TRUE,
+                # encircleCol = "black",
+                # encircleFill = "pink",
+                # encircleAlpha = 3/4,
+                # encircleSize = 2.5,
+                shade = NULL,
+                shadeFill = "grey",
+                shadeAlpha = 1/2,
+                shadeSize = 0.01,
+                shadeBins = 2,
+                drawConnectors = TRUE,
+                widthConnectors = 0.5,
+                typeConnectors = "closed",
+                endsConnectors = "first",
+                lengthConnectors = unit(0.01, "npc"),
+                colConnectors = "grey10",
+                max.overlaps = 30,
+                maxoverlapsConnectors = NULL,
+                min.segment.length = 0,
+                directionConnectors = "both",
+                arrowheads = TRUE,
+                hline = NULL,
+                hlineType = "longdash",
+                hlineCol = "black",
+                hlineWidth = 0.4,
+                vline = NULL,
+                vlineType = "longdash",
+                vlineCol = "black",
+                vlineWidth = 0.4,
+                gridlines.major = TRUE,
+                gridlines.minor = TRUE,
+                border = "partial",
+                borderWidth = 0.8,
+                borderColour = "black",
+                raster = FALSE
+                )
