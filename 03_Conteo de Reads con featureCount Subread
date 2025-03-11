@@ -18,6 +18,7 @@ dir_analisis <- getwd()
 dir_temp <- paste (dir_analisis,"/Resultados/align/", sep = "", collapse=NULL)
 archivo<-list.files(path = dir_temp, pattern = ".BAM$")
 archivo
+setwd("../")
 
 # Realizar el conteo de reads en la lista de archivos BAM
 for (val in archivo)
