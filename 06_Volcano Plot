@@ -5,12 +5,8 @@ library(ggrepel)
 library(EnhancedVolcano)
 
 # Cargar archivos de resultados de expresión diferencial producto de DESeq2
-# definir como directorio de trabajo la carpeta DESeq2
+# definir como directorio de trabajo la carpeta DESeq2_align
 setwd("./Resultados/DESeq2_align")
-
-# =======================================================================
-# Para datos alineados con subjunc
-ds_volcano <- read.csv('./Res_DS2_subjunc_annot.csv',header = TRUE)
 
 # =======================================================================
 # Para datos alineados con Align
@@ -21,7 +17,6 @@ ds_volcano <- read.csv('./Res_DS2_align_annot.csv',header = TRUE)
 gen_sel<- ds_volcano %>% filter(abs(log2FoldChange)>=4) %>% dplyr::select(external_gene_name) %>% unlist()
 
 # Generar volcano plot
-
 EnhancedVolcano(ds_volcano,
                 lab = (ds_volcano$external_gene_name),
                 x = 'log2FoldChange',
