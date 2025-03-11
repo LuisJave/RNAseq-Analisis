@@ -1,0 +1,93 @@
+# Analisis de Enriquecimiento con PathfindR
+# https://egeulgen.github.io/pathfindR/
+
+library(tidyverse)
+library(dplyr)
+library(pathfindR)
+
+# Definir directorio de trabajo: resultados de DESeq2
+setwd("./Resultados/DESeq2_align")
+
+# crear una tabla con los datos de DESeq2
+# Estos deben tener el siguiente orden:Gene_symbol, logFC, FDR_p
+datos1 <- read.csv('./Res_DS2_align_annot.csv',header = TRUE)
+datos1.1 <- subset(datos1, select = c(external_gene_name, log2FoldChange, padj))
+
+# Quitar los datos que contienen NA
+datos1.1 <- na.omit(datos1.1)
+
+# Checar si la tabla de datos esta correcta
+input_testing(datos1.1, p_val_threshold = 0.05)
+
+# KEGG pathways default (gene_sets ='Go-All' o 'BioCarta')
+# Algoritmo de busqueda "Greedy Algorithm" Default
+# Ideker T, Ozier O, Schwikowski B, Siegel AF.
+# Discovering regulatory and signalling circuits in molecular interaction networks.
+# Bioinformatics. 2002;18 Suppl 1:S233-40.
+
+# =================================================================================
+# -----------------  Para vias KEGG -----------------------------------------------
+# Correr pathfindR y depositar el valor en la variable "kegg_enr"
+kegg_enr <- run_pathfindR(datos1.1,
+                          gene_sets = "KEGG",
+                          min_gset_size = 10,
+                          max_gset_size = 300,
+                          pin_name_path = "Biogrid",
+                          p_val_threshold = 0.05,
+                          enrichment_threshold = 0.05,
+                          output_dir = "./Enrich/KEGGs",
+                          # list_active_snw_genes = FALSE
+                          )
+
+# Graficar las 40 vias mas enriquecidas para KEGG
+enrichment_chart (kegg_enr,
+                  top_terms = 40,
+                  plot_by_cluster = FALSE,
+                  num_bubbles = 5,
+                  even_breaks = TRUE)
+
+# Escribir la tabla de resultados de enriquecimiento de las vias KEGG
+write.csv(kegg_enr, file = "./Enrich/Enrich_KEGG.csv")
+
+# =================================================================================
+# -----------------  Para vias GO-All ---------------------------------------------
+# Correr pathfindR y depositar el valor en la variable "go_enr"
+go_enr <- run_pathfindR (datos1.1,
+                         gene_sets = "GO-All",
+                         min_gset_size = 10,
+                         max_gset_size = 300,
+                         # pin_name_path = "Biogrid",
+                         p_val_threshold = 0.05,
+                         enrichment_threshold = 0.05,
+                         output_dir = "./Enrich/GO_All",
+                         #list_active_snw_genes = FALSE,
+                         )
+                            
+# Graficar las 40 vias mas enriquecidas para GO-All
+enrichment_chart(go_enr,
+                 top_terms = 40,
+                 plot_by_cluster = FALSE,
+                 num_bubbles = 5,
+                 even_breaks = TRUE)
+
+#Escribir la tabla de resultados de enriquecimiento de las vias GO-All
+write.csv(go_enr, file = "./Enrich/Enrich_GoAll.csv")
+
+# ================================================================================
+# Procesar los datos de inicio para visualizacion
+genes_procesados <- input_processing(datos1.1)
+
+# Visualizar vias KEGGs
+visualize_terms(kegg_enr,
+                input_processed = genes_procesados,
+                pin_name_path = "Biogrid")
+
+visualize_hsa_KEGG(
+  'hsa03030',
+  genes_procesados,
+  scale_vals = TRUE,
+  node_cols = NULL,
+  quiet = TRUE,
+  key_gravity = "northeast",
+  logo_gravity = "southeast"
+)
