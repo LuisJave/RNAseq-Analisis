@@ -2,16 +2,24 @@
 # Elaborar las tablas de conteo con el featureCount de Subread
 # Esta hecho para serie de archivos con terminacion .BAM
 # ----------------------------  align ------------------------------------------
+# cargar el paquete Rsubread
+library(Rsubread)
+
+# limpiar las variables del sistema
+rm(list = ls())
 
 # Ir al directorio de análisis y definirlo como de trabajo:
-
 setwd("./dir_analisis")
+
+# Crear una variable con la dirección del directorio de análisis
 dir_analisis <- getwd()
 
+# Crear una variable con la lista de archivos BAM que se analizarán
 dir_temp <- paste (dir_analisis,"/Resultados/align/", sep = "", collapse=NULL)
 archivo<-list.files(path = dir_temp, pattern = ".BAM$")
 archivo
 
+# Realizar el conteo de reads en la lista de archivos BAM
 for (val in archivo)
 {
   file1<-paste(dir_analisis,"/Resultados/align/",val, sep = "", collapse=NULL)
