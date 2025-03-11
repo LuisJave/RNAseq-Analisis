@@ -88,7 +88,7 @@ write.csv(norm_dds, "./Data_DS2_align_norm.csv", row.names = TRUE)
 
 # ==============================================================================
 # ---------------  Graficar comportamiento de las muestras  --------------------
-
+#
 # Gráfico de dispersion de los datos por muestra
 boxplot(log10(assays(dds)[["cooks"]]), range=0, las=2)
 
@@ -143,9 +143,7 @@ pheatmap(assay(dds_vst)[select,], cluster_rows=FALSE, show_rownames=FALSE,
 #                   RESULTADOS DEGs y Anotación de DEGs
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Cargar los datos para anotación 
-mart <- useDataset("hsapiens_gene_ensembl",
-                   useMart("ensembl",
-                           host = "https://useast.ensembl.org"))
+mart <- useDataset("hsapiens_gene_ensembl", useMart("ensembl"))
 
 # Crear las tablas de resultados y escribir el resultado
 res <- results(dds, contrast=c("Condicion","problema","control"))
