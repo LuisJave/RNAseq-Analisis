@@ -1,0 +1,51 @@
+# Cargar la libreria
+library(ggVennDiagram)
+library(dplyr)
+library(plotly)
+
+# Definir el directorio de trabajo
+setwd("./Venn")
+
+# Cargar tablas de expresion diferencial, anotadas con el nombre del gene
+vd1 <- read.csv('./Res_DS2_align_annot_01.csv',header = TRUE)
+vd2 <- read.csv('./Res_DS2_align_annot_02.csv',header = TRUE)
+
+# Seleccionar los genes relevantes abs(FoldChange)>2 padj<0.05
+set1 <- vd1 %>% filter(log2FoldChange!="NA" & padj<0.05 & abs(log2FoldChange)>2) %>% select(external_gene_name) %>% unlist()
+set2 <- vd2 %>% filter(log2FoldChange!="NA" & padj<0.05 & abs(log2FoldChange)>2) %>% select(external_gene_name) %>% unlist()
+
+# Crear la lista de los grupos a contrastar
+Total <- list(set1, set2)
+
+# Crear el diagrama
+ggVennDiagram(
+  Total,
+  category.names = names(Total),
+  show_intersect = FALSE,
+  set_color = "black",
+  set_size = NA,
+  label = c("both", "count", "percent", "none"),
+  label_alpha = 0.5,
+  label_geom = c("label", "text"),
+  label_color = "black",
+  label_size = NA,
+  label_percent_digit = 0,
+  label_txtWidth = 40,
+  edge_lty = "solid",
+  edge_size = 1,
+  force_upset = FALSE,
+  nintersects = 20,
+  order.intersect.by = c("size", "name", "none"),
+  order.set.by = c("size", "name", "none"),
+  relative_height = 3,
+  relative_width = 0.3
+  )
+
+# Extraer genes comunes o solo de uno de los sets
+comunes<- intersect(set1,set2)
+solo_set1<- setdiff(set1, set2)
+solo_set2<- setdiff(set2, set1)
+
+write.csv(comunes, "./GenesComunes.csv", row.names = TRUE)
+write.csv(solo_set1, "./Solo_Set1.csv", row.names = TRUE)
+write.csv(solo_set2, "./Solo_Set2.csv", row.names = TRUE)
