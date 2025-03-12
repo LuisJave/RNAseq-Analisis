@@ -5,6 +5,9 @@ library(tidyverse)
 library(dplyr)
 library(pathfindR)
 
+# limpiar las variables del sistema
+rm(list = ls())
+
 # Definir directorio de trabajo: resultados de DESeq2
 setwd("./Resultados/DESeq2_align")
 
