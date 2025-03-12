@@ -75,22 +75,3 @@ enrichment_chart(go_enr,
 
 #Escribir la tabla de resultados de enriquecimiento de las vias GO-All
 write.csv(go_enr, file = "./Enrich/Enrich_GoAll.csv")
-
-# ================================================================================
-# Procesar los datos de inicio para visualizacion
-genes_procesados <- input_processing(datos1.1)
-
-# Visualizar vias KEGGs
-visualize_terms(kegg_enr,
-                input_processed = genes_procesados,
-                pin_name_path = "Biogrid")
-
-visualize_hsa_KEGG(
-  'hsa03030',
-  genes_procesados,
-  scale_vals = TRUE,
-  node_cols = NULL,
-  quiet = TRUE,
-  key_gravity = "northeast",
-  logo_gravity = "southeast"
-)
