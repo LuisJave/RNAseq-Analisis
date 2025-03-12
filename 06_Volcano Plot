@@ -17,7 +17,7 @@ ds_volcano <- read.csv('./Res_DS2_align_annot.csv',header = TRUE)
 
 #========================================================================
 # seleccionar genes para mostrar en el gráfico 
-gen_sel<- ds_volcano %>% filter(abs(log2FoldChange)>=4) %>% dplyr::select(external_gene_name) %>% unlist()
+gen_sel<- ds_volcano %>% filter(abs(log2FoldChange)>=2) %>% dplyr::select(external_gene_name) %>% unlist()
 
 # Generar volcano plot
 EnhancedVolcano(ds_volcano,
