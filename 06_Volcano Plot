@@ -4,6 +4,9 @@ library(ggplot2)
 library(ggrepel)
 library(EnhancedVolcano)
 
+# limpiar las variables del sistema
+rm(list = ls())
+
 # Cargar archivos de resultados de expresión diferencial producto de DESeq2
 # definir como directorio de trabajo la carpeta DESeq2_align
 setwd("./Resultados/DESeq2_align")
