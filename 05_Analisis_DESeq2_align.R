@@ -236,7 +236,10 @@ abline(h=c(-1,1), col="red", lwd=1)
 idx <- identify(res$baseMean, res$log2FoldChange)
 rownames(res)[idx]
 
-# Para determinar el comportamiento del gen con la minima padj
+# Para determinar el comportamiento del gen con el máximo valor de fold change
+plotCounts(dds, gene = which.max(res$log2FoldChange), intgroup = "Condicion")
+
+# Para determinar el comportamiento del gen con el valor minimo de padj
 plotCounts(dds, gene = which.min(res$padj), intgroup = "Condicion")
 
 # Para determinar el comportamiento de un gen particular sabiendo su codigo Ensembl
