@@ -8,8 +8,8 @@ rm(list = ls())
 
 # Estructura de las carpetas:
 # definir el directorio de trabajo en este directorio deben de estar las carpetas: con
-# ./RefData/Hg38v47       <--- archivos de referencia
-# ./RefGen47              <--- indice del genoma
+# ./RefData/Hg38v49       <--- archivos de referencia
+# ./RefGen49              <--- índice del genoma
 # ./dir_analisis          <--- directorio de análisis (cambiar el nombre a conveniencia)
 # ./dir_analisis/RawData  <--- Los datos (archivos fastq) colocarlos en este directorio
 # definir al directorio de análisis y como de trabajo:
@@ -92,3 +92,4 @@ for (val in archivo)
     GTF.attrType = "gene_id",
     chrAliases = NULL)
 }
+
