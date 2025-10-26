@@ -1,9 +1,21 @@
-# Estructura de las carpetas:
-# definir el directorio de trabajo en este directorio deben de estar las carpetas: con
-# ./RefData/Hg38v49       <--- archivos de referencia
-# ./RefGen49              <--- índice del genoma
-# ./dir_analisis          <--- directorio de análisis (cambiar el nombre a conveniencia)
-# ./dir_analisis/RawData  <--- Los datos (archivos fastq) colocarlos en este directorio
+# Crear las carpetas de trabajo y obtención de los archivos del genoma
+# En Rstudio ubicarse en el directorio de trabajo principal y definirlo como directorio de trabajo
+# En este directorio vamos a crear las carpetas para el análisis de RNAseq
+#
+dir_principal <- getwd()
+dir.create("./RefData")
+dir.create("./RefData/Hg38v49") # Aquí pondremos los archivos del genoma y los archivos de topología
+dir.create("./RefGen49")        # Aquí crearemos el índice del genoma
+#
+# Los archivos de referencia se pueden descargar de --> https://www.gencodegenes.org/
+# archivo GTF, GFF3 y Fasta del genoma de interés
+#
+setwd("./RefData/Hg38v49")
+options(timeout = 1200) # timeout a 20 minutos para descargar el archivo del genoma humano aprox. 810Mb
+download.file("https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/GRCh38.primary_assembly.genome.fa.gz","GRCh38.primary_assembly.genome.fa.gz")
+download.file("https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/gencode.v49.primary_assembly.annotation.gtf.gz","gencode.v49.primary_assembly.annotation.gtf.gz")
+download.file("https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/gencode.v49.primary_assembly.annotation.gff3.gz","gencode.v49.primary_assembly.annotation.gff3.gz")
+#
 # definir al directorio de análisis y como de trabajo:
 
 setwd("./dir_analisis")
