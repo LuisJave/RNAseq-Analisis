@@ -15,3 +15,4 @@ dir.create("./Resultados/counts")
 dir.create("./Resultados/counts/align")
 dir.create("./Resultados/DESeq2_align")
 setwd("../")
+
