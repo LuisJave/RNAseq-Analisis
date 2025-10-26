@@ -16,11 +16,10 @@ download.file("https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release
 download.file("https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/gencode.v49.primary_assembly.annotation.gtf.gz","gencode.v49.primary_assembly.annotation.gtf.gz")
 download.file("https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/gencode.v49.primary_assembly.annotation.gff3.gz","gencode.v49.primary_assembly.annotation.gff3.gz")
 #
-# definir al directorio de análisis y como de trabajo:
-
-setwd("./dir_analisis")
+# Crear un directorio con el nombre del análisis que deseamos hacer y definirlo como directorio de trabajo
+# En este directorio se crearán las carpetas para el análisis posterior.
+setwd("./")
 dir_analisis <- getwd()
-
 dir.create("./Resultados")
 dir.create("./Resultados/subjunc")
 dir.create("./Resultados/counts")
