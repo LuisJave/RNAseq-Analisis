@@ -6,22 +6,11 @@ library(Rsubread)
 # limpiar las variables del sistema
 rm(list = ls())
 
-# Estructura de las carpetas:
-# definir el directorio de trabajo en este directorio deben de estar las carpetas: con
-# ./RefData/Hg38v49       <--- archivos de referencia
-# ./RefGen49              <--- índice del genoma
-# ./dir_analisis          <--- directorio de análisis (cambiar el nombre a conveniencia)
-# ./dir_analisis/RawData  <--- Los datos (archivos fastq) colocarlos en este directorio
-# definir al directorio de análisis y como de trabajo:
+# Ir al directorio de análisis y definirlo como directorio de trabajo
 
-setwd("./dir_analisis")
+setwd("./dir_analisis")  # cambiar el nombre dir_analisis por el nombre del directorio en uso
 dir_analisis <- getwd()
 
-dir.create("./Resultados")
-dir.create("./Resultados/align")
-dir.create("./Resultados/counts")
-dir.create("./Resultados/counts/align")
-dir.create("./Resultados/DESeq2_align")
 setwd("../")
 
 # =====================================================================================
@@ -32,15 +21,15 @@ dir_temp <- paste (dir_analisis,"/RawData/", sep = "", collapse=NULL)
 archivo <- list.files(path= dir_temp, pattern = ".gz$")
 archivo
 
-# loop para alinear/mapear todos los archivos, se alinearan como single end
+# loop para alinear/mapear todos los archivos, se alinearán como single end
 for (val in archivo)
 {
   file1<-paste(dir_analisis,"/RawData/",val, sep = "", collapse=NULL)
-  file2<-paste(dir_analisis,"/Resultados/align/",val,".BAM", sep = "", collapse = NULL)
+  file2<-paste(dir_analisis,"/Resultados/BAMs/align/",val,".BAM", sep = "", collapse = NULL)
   # alineamiento
   align(
     # index for reference sequences
-    index = "./RefGen47/Hg38v47",
+    index = "./RefGen49/Hg38v49",
     # input reads and output
     readfile1 = file1,
     type = "rna",
@@ -86,10 +75,9 @@ for (val in archivo)
     detectSV = FALSE,
     # gene annotation
     useAnnotation = TRUE,
-    annot.ext = "./RefData/Hg38v47/gencode.v47.primary_assembly.annotation.gtf.gz",
+    annot.ext = "./RefData/Hg38v49/gencode.v49.primary_assembly.annotation.gtf.gz",
     isGTF = TRUE,
     GTF.featureType = "exon",
     GTF.attrType = "gene_id",
     chrAliases = NULL)
 }
-
