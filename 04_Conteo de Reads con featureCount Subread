@@ -1,6 +1,6 @@
 # ==============================================================================
 # Elaborar las tablas de conteo con el featureCount de Subread
-# Esta hecho para serie de archivos con terminacion .BAM
+# Está hecho para una serie de archivos con terminación.BAM
 # ----------------------------  align ------------------------------------------
 # cargar el paquete Rsubread
 library(Rsubread)
@@ -15,7 +15,7 @@ setwd("./dir_analisis")
 dir_analisis <- getwd()
 
 # Crear una variable con la lista de archivos BAM que se analizarán
-dir_temp <- paste (dir_analisis,"/Resultados/align/", sep = "", collapse=NULL)
+dir_temp <- paste (dir_analisis,"/Resultados/BAMs/align/", sep = "", collapse=NULL)
 archivo<-list.files(path = dir_temp, pattern = ".BAM$")
 archivo
 setwd("../")
@@ -23,7 +23,7 @@ setwd("../")
 # Realizar el conteo de reads en la lista de archivos BAM
 for (val in archivo)
 {
-  file1<-paste(dir_analisis,"/Resultados/align/",val, sep = "", collapse=NULL)
+  file1<-paste(dir_analisis,"/Resultados/BAMs/align/",val, sep = "", collapse=NULL)
   cuentas<-featureCounts(files=file1,
                          annot.ext = "./RefData/Hg38v47/gencode.v47.primary_assembly.annotation.gtf.gz",
                          isGTFAnnotationFile = TRUE,
