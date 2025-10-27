@@ -1,12 +1,8 @@
 # ============================================================================
-# Crear el Indice del Genoma de Humano Hg38 v49 para Rsubread
+# Crear el índice del genoma de humano Hg38 v49 para Rsubread
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Tener una carpeta con los datos del genoma y los archivos de topología
-# Los archivos se pueden descargar de --> https://www.gencodegenes.org/
-# archivo GTF, GFF3 y Fasta del genoma de interés
-# Crear las siguientes carpetas:
-# ./RefData/Hg38v49/   <--- carpeta con los archivos del genoma Fasta, GTF y GFF
-# ./RefGen49/          <--- carpeta donde se creará el índice del genoma
+# Ir al directorio principal, en este directorio está la carpeta "RefData" 
+# con los datos del genoma y los archivos de topología
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Si los recursos de la computadora son limitados
 # cambiar:
@@ -25,4 +21,5 @@ if (file.exists("./RefData/Hg38v49/GRCh38.primary_assembly.genome.fa.gz"))
              # memory = 10000
              )
 } else { print(paste("El archivo del genoma no se encuentra en la carpeta ./RefData/"))}
+
 
