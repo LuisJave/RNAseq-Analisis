@@ -27,7 +27,7 @@ setwd("./dir_analisis")  # <-- Este directorio es propio de cada uno
 
 # guardar el directorio principal
 dir1 <- getwd()
-DESeq2_dir <- file.path(dir1, "Resultados", "DESeq2_align")
+DESeq2_dir <- file.path(dir1, "Resultados", "DESeq2", "align")
 setwd(DESeq2_dir)
 
 # Cargar la informacion de la matriz de conteo de align
@@ -244,3 +244,4 @@ plotCounts(dds, gene = which.min(res$padj), intgroup = "Condicion")
 
 # Para determinar el comportamiento de un gen particular sabiendo su codigo Ensembl
 plotCounts(dds, gene = "ENSG00000145794.17", intgroup = "Condicion")
+
