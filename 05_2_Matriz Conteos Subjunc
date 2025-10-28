@@ -1,0 +1,29 @@
+# ==============================================================================
+# ********************************   subjunc  ************************************
+# crea una tabla matriz con los datos de conteo generados con subjunc
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# cargar las librerias necesarias
+
+library(dbplyr)
+library(tidyverse)
+
+# limpiar las variables del sistema
+rm(list = ls())
+
+# Definir el directorio de trabajo principal
+setwd("./dir_analisis")  # <-- Este directorio es propio de cada uno
+
+# guardar el directorio principal
+dir_analisis <- getwd()
+
+# definir el directorio de los archivos de conteo de align
+subjunc_dir <- file.path(dir_analisis, "Resultados", "counts", "subjunc")
+setwd(subjunc_dir)
+
+# genera la variable archivos con la lista de nombres de los archivos de conteo
+archivos<-list.files(path = "./", pattern = ".count$")
+Data_file <- map(archivos,read.delim, stringsAsFactors = FALSE, check.names = FALSE, row.names = NULL)
+Matriz<- Data_file %>% reduce(inner_join, by = "cuentas.annotation...c..GeneID...")
+res_dir <- file.path(dir_analisis, "Resultados", "DESeq2", "subjunc")
+setwd(res_dir)
+write.csv(Matriz, "./Matriz_conteo_subjunc.csv", row.names = F)
