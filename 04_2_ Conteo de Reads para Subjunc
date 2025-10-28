@@ -1,0 +1,38 @@
+# ==============================================================================
+# Elaborar las tablas de conteo con el featureCount de Subread
+# Está hecho para una serie de archivos con terminación.BAM
+# ----------------------------  subjunc ----------------------------------------
+# cargar el paquete Rsubread
+library(Rsubread)
+
+# limpiar las variables del sistema
+rm(list = ls())
+
+# Ir al directorio de análisis y definirlo como de trabajo:
+setwd("./dir_analisis")
+
+# Crear una variable con la dirección del directorio de análisis
+dir_analisis <- getwd()
+
+# Crear una variable con la lista de archivos BAM que se analizarán
+dir_temp <- paste (dir_analisis,"/Resultados/BAMs/subjunc/", sep = "", collapse=NULL)
+archivo<-list.files(path = dir_temp, pattern = ".BAM$")
+archivo
+setwd("../")
+
+# Realizar el conteo de reads en la lista de archivos BAM
+for (val in archivo)
+{
+  file1<-paste(dir_analisis,"/Resultados/BAMs/subjunc/",val, sep = "", collapse=NULL)
+  cuentas<-featureCounts(files=file1,
+                         annot.ext = "./RefData/Hg38v47/gencode.v47.primary_assembly.annotation.gtf.gz",
+                         isGTFAnnotationFile = TRUE,
+                         nthreads = 22)
+  write.table(
+    x=data.frame(cuentas$annotation[,c("GeneID")],
+                 cuentas$counts,stringsAsFactors = FALSE),
+    file=paste(dir_analisis,"/Resultados/counts/subjunc/",val,".count", sep = "", collapse = NULL),
+    quote = FALSE,
+    sep = "\t",
+    row.names = FALSE)
+}
