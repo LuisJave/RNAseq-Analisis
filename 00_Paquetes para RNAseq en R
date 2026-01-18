@@ -57,14 +57,12 @@ BiocManager::install("pathview")
 BiocManager::install("RCy3")
 BiocManager::install("Rfastp")
 
-
-
 #Para actualizar los paquetes de Bioconductor
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 BiocManager::install()
 
-# Instalacion de paquetes Devtools
+# Instalación de paquetes Devtools
 # =============================================================
 if (!require(devtools))
   install.packages("devtools")
@@ -72,7 +70,7 @@ devtools::install_github("gaospecial/ggVennDiagram")
 devtools::install_github("https://github.com/hancockinformatics/pathlinkR")
 devtools::install_github("noriakis/ggkegg")
 
-# Instalar PathfindR (analisis de enriquecimiento)
+# Instalar PathfindR (análisis de enriquecimiento)
 # =============================================================
 install.packages("pak") # if you have not installed "pak"
 pak::pkg_install("pathfindR")
@@ -82,5 +80,4 @@ remotes::install_github("kevinblighe/CorLevelPlot")
 install.packages("remotes")
 remotes::install_github("omnideconv/immunedeconv")
 remotes::install_github("kevinblighe/CorLevelPlot")
-
 
