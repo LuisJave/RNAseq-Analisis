@@ -6,6 +6,7 @@ dir_principal <- getwd()
 dir.create("./RefData")
 dir.create("./RefData/Hg38v49") # Aquí pondremos los archivos del genoma y los archivos de topología
 dir.create("./RefGen49")        # Aquí crearemos el índice del genoma
+dir.create("./RawData")
 #
 # Los archivos de referencia se pueden descargar de --> https://www.gencodegenes.org/
 # archivo GTF, GFF3 y Fasta del genoma de interés
