@@ -25,7 +25,7 @@ for (val in archivo)
 {
   file1<-paste(dir_analisis,"/Resultados/BAMs/subjunc/",val, sep = "", collapse=NULL)
   cuentas<-featureCounts(files=file1,
-                         annot.ext = "./RefData/Hg38v47/gencode.v47.primary_assembly.annotation.gtf.gz",
+                         annot.ext = "./RefData/Hg38v49/gencode.v49.primary_assembly.annotation.gtf.gz",
                          isGTFAnnotationFile = TRUE,
                          nthreads = 22)
   write.table(
