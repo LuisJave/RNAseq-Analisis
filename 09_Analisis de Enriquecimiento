@@ -1,4 +1,4 @@
-# Analisis de Enriquecimiento con PathfindR
+# Análisis de Enriquecimiento con PathfindR
 # https://egeulgen.github.io/pathfindR/
 
 library(tidyverse)
@@ -9,7 +9,7 @@ library(pathfindR)
 rm(list = ls())
 
 # Definir directorio de trabajo: resultados de DESeq2
-setwd("./Resultados/DESeq2_align")
+setwd("./Resultados/DESeq2/align")
 
 # crear una tabla con los datos de DESeq2
 # Estos deben tener el siguiente orden:Gene_symbol, logFC, FDR_p
